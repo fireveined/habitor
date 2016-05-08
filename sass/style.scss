@@ -1,0 +1,614 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+ 
+$article-transition-time: 0.6s;
+$bg-second-color:  #F3F3F3;
+$gap-size: 1;
+
+@mixin gap($property, $size) { 
+  #{$property}: calc(( 5% + 39px ) * #{$size} * #{$gap-size}); 
+} 
+
+@mixin email-input($width, $height){
+    color:   #3C3C3C;
+    height:  $height;
+    padding: 5px 4%;
+    width: $width;
+    background-color: #F3F3F3;
+    border: 1px #000000 solid;
+    box-sizing: border-box; 
+}
+
+@mixin subscribe-button($padding-left-right, $height){
+    color: #FFFFFF;
+    padding: 0 $padding-left-right;
+    background-color: #343638;
+    line-height: $height;
+    transition: all 0.3s;
+    &:hover{
+        background-color: #000000
+    }
+}
+
+ a{
+     text-decoration: none;
+ }
+ 
+ .navigation{
+    margin: 0;     
+    list-style: none;
+    display: flex;  
+    justify-content:  flex-end ;
+    
+    a {
+        padding: 0 5px 9px;
+        color: #E4E6E7;
+        border-bottom:2px rgba(0,0,0,0) solid;
+        transition: all 0.5s;
+    }
+    
+    li {
+        margin: 0 5px;
+        padding: 4px 5px 10px;
+
+        & a:hover{
+            border-bottom:2px #B7C8D9 solid;          
+        }
+        
+        &.active a{
+            border-bottom:2px #B7C8D9 solid;
+        }   
+    } //li     
+ } //navigation
+ 
+ 
+html {
+    font-size: 62.5%; 
+} 
+
+body{
+    margin:0;
+    padding: 0;   
+    font-family:  'Open Sans';
+    font-size: 1.4rem;
+    font-weight: 700;  
+}
+
+.content{
+    max-width:1170px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.page-header{
+    max-width:1600px;
+    margin: 0 auto;
+    padding-top: 30px;
+    background: url('../img/header_bg.jpg') center top;
+    border: 1px rgb(0,40,80) solid;
+    color: #E4E6E7;
+    
+    .page-logo{
+        margin: 10px 20px;
+        float: left;
+        line-height: 35px;
+    }
+
+    .menu-overlay{
+        margin: 0;
+        transition: all 0.5s;
+    }
+    
+    .hamburger{
+        display:none;
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        
+       img{
+            width: 30px;
+        }
+    }    
+    
+    .title {
+        margin-bottom: 0px;
+        margin-top: 215px;
+        text-transform: uppercase;
+        letter-spacing: 9px;
+        font-size: 5.5rem;
+        font-weight: 300;
+
+        i { 
+            font-size: 1.3em;
+        } 
+    }
+    
+    .describe {
+      margin-bottom: 170px;  
+    }
+    
+    .more{  
+        margin-bottom: 100px;  
+        padding: 18px 64px;
+        background-color: rgba(0, 0, 0, 0.45);
+        color: #FFFFFF;
+        border: 1px #FFFFFF solid;
+        font: 1.3rem;  
+        transition: all 0.3s;
+
+        &:hover{
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.75);
+        }
+        
+    }
+} //.page-header
+
+
+#company-describe{
+    
+    @extend .content;
+    @include gap(padding-top, 1.0);
+    @include gap(padding-bottom, 1.0);
+    
+    display: flex;
+    text-align: left;
+    
+    h2{
+        margin-top:0;
+        margin-right:40px;
+        font-size: 2.4rem;
+        font-weight: 300;
+        flex: 1 0 0;  
+        
+    }
+    
+    p{
+        margin-top:0;
+        margin-left:20px;
+        flex: 1 0 0;
+    }
+} //.company-describe
+
+
+.featured-articles{
+    
+    @include gap(padding-top, 0.5);
+    background-color: #F3F3F3;
+    text-align: center;
+    
+    .featured-articles-content{
+        @extend .content;
+        display: flex;
+        flex-wrap:  wrap;
+        justify-content: space-between;
+        
+    }
+    
+    .articles-header{
+        font-size: 2.4rem;
+        font-weight: 300;
+        @include gap(margin-bottom,  0.5);
+    }
+    
+    article{
+        position: relative;
+        margin-top:30px;
+        
+        .like-box{
+            position: absolute; 
+            left: calc(100% - 90px);
+            bottom: calc(100% - 60px);
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 2px #FFFFFF solid;
+            color: #FFFFFF;
+        }
+        
+        &.show-info .like-box{
+             left: calc(100% - 65px);
+             padding: 10px 13px;
+             color: #000000;
+             background-color: rgba(255, 255, 255, 0.6);
+             border: 0;
+             transition: all 0.3s;
+             
+             &:hover{
+                  color: rgba(175,0,0,120);
+                  background-color: rgba(255, 255, 255, 0.4);
+                  cursor: pointer;
+             }
+             
+             .count{
+                 display:none;
+             }
+        } //like-box
+
+        .article-header{
+            position: absolute;
+            bottom: 15px;
+            left: 40px;      
+            font-weight: 300;
+            color: #FFFFFF;   
+            transition: all  $article-transition-time;
+        }
+        
+        &.show-info .article-header{
+                opacity: 0.0;
+        }
+        
+        .overlay{
+            position:absolute;
+            width:100%;
+            height:100%;
+            opacity: 0.8;
+            transition: all  $article-transition-time;
+        }
+        
+        // hack for bottom gradient on image (browsers don't support transition on gradients)
+        .overlay:after{
+            position:absolute;
+            width:100%;
+            height:100%;
+            content: '';
+            top: 0;
+            left: 0;
+            z-index: 2;
+            background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,0.8)); 
+            transition: all  $article-transition-time;
+        }
+        
+        &.show-info .overlay{
+                background: black;
+         }
+         
+        &.show-info .overlay:after{
+                opacity: 0;
+         }
+        
+        .informations{ 
+            margin-top: 12%;
+            opacity: 0;
+            color: $bg-second-color;
+            transition: all  $article-transition-time;
+            
+            .author-photo{
+                border-radius:50%;
+                margin-bottom: 15px;
+                opacity: 0.6;
+                width: 70px;
+            }
+            
+            p{
+                margin: 0 auto;
+                font-weight: 600;        
+            }
+            
+            .caption{
+                width:45%;
+            }
+            .author-name, .date{
+                color: #A3A3A3;
+            }
+            
+            .date{
+                margin-top:50px;
+            }
+            
+        } //.informations
+        
+        &.show-info .informations{ 
+            opacity: 0.85;
+            display: block;
+        } 
+    } //article  
+} //featured-articles
+
+
+.subscription{
+
+    background-color:  $bg-second-color;
+    @include gap(padding-top, 1.0);
+    @include gap(padding-bottom, 1.0);
+    text-align:center;
+    
+    .subscription-content{
+        @extend .content;
+        box-sizing: border-box;
+        padding: 50px 100px;
+        display: flex;
+        align-content: center;
+        justify-content: space-between;
+        background-color: #FFFFFF;
+        
+       subscription-header{
+            margin:9px;
+            font-weight: 200;
+            font-size: 2.4rem;
+        }
+        
+        .subscribe-form{
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .email-input{
+            @include email-input(380px, 52px);
+        }
+        
+        .subscribe-button{
+            @include subscribe-button(40px, 52px);
+        }  
+    }
+} //.subsctriction
+
+
+footer{
+    
+    @extend .content;
+    @include gap(margin-top, 0.83);
+    text-align: left;
+    
+    .footer-info{
+        display: flex;
+        justify-content: space-between;
+        
+        article{
+            width:17%;
+        }
+        article:last-child{
+            width:22%;
+        }
+        
+        blockquote{
+            margin:0;
+        }
+        
+        p{
+            margin: 0.6em 0;
+            color: #BFBFBF;
+            line-height: 180%;
+        }
+        
+        .tweet-time{
+            color: #DBDBDB;
+        }
+        
+        .subscribe-form{
+            margin-top:20px;
+            font-size: 1.2rem;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .email-input{
+            font-size: 1.2rem;
+            @include email-input(165px, 48px);
+        }
+        
+        .subscribe-button{
+            @include subscribe-button(15px, 48px);
+        }
+        
+    }//footer-info
+    
+    
+    .footer-copyright{
+        
+        margin-top: 100px;
+        padding:11px 0px;
+        display:flex;
+        justify-content: space-between;
+        border-top: 1px #E3E3E3 solid;
+        
+        .copyright{
+            color: #A3A3A3;
+            line-height: 35px;
+        }
+            
+        .navigation{
+            
+            a {
+                color: #000000;
+                font-weight: 300;
+            }
+            
+            li {
+                padding: 20px;
+            }
+        } //navigation  
+    } //footer-copyright  
+} //footer
+
+
+@media only screen and (max-width: 1170px) {
+
+    #company-describe{
+    margin: 0 30px;    
+    }
+
+    .featured-articles .featured-articles-content{
+        justify-content: center;
+        
+        article{
+        margin-right:10px;
+        margin-left:10px;   
+        }
+        
+    }
+
+
+    .subscription .subscription-content{
+        display: block;
+        
+        h2{
+            margin-bottom:50px;
+        }
+    }
+    
+    footer{
+        
+        .footer-info{
+            flex-wrap: wrap;
+            justify-content: center;
+            padding:0 7%;
+            
+            article {
+                width: 285px !important;; //!important cause article:last-child has different default width
+                margin: 0 20px;
+            }
+            
+        }
+        
+        .footer-copyright{
+            padding:0 20px;
+        }
+        
+    } //footer 
+} //media width < 1170px
+
+
+
+@media only screen and (max-width: 790px) {
+
+    .page-header .title{
+        font-size: 3.5rem;   
+    }
+    
+    #company-describe{
+        
+        flex-direction: column;
+        
+        h2{
+            margin-bottom: 70px;
+        }
+        
+        p{
+            margin:0;
+        }   
+    } //company-describe
+    
+    .featured-articles-content article{
+        width: 370px;
+        margin: 20px 20px;
+        overflow: hidden;
+        
+        &:last-child{
+            margin-bottom:0;
+        }
+    }
+    
+     .subscription .subscription-content{
+        padding: 50px 10px;
+        
+        .email-input{
+            width: 245px;
+        }   
+    }   //subscription
+    
+    footer{  
+        
+        .footer-info{
+            justify-content: flex-start;
+            
+            article{
+                width: 100% !important; 
+            }
+        }
+        
+        .footer-copyright{      
+                padding-top: 70px; 
+                text-align:center;
+                flex-direction: column-reverse;
+                
+            .navigation{
+                flex-direction: column;
+                padding: 0;
+                li {
+                    padding: 20px 5%;
+                }
+            }
+        } //footer-copyright
+    } //footer
+} //media width < 790px
+
+
+
+
+
+@media only screen and (max-width: 480px) {
+
+    .page-header{
+        
+        padding-top:0px;
+        
+        .hamburger {
+            display: block;
+        }
+        
+        .page-banner{
+            margin-top:30px;
+            opacity: 0;
+            display: inline-block;
+            transition: all 0.5s;
+        }
+        
+        &.menu-opened .page-banner{
+            opacity:1;
+        } 
+        
+        .menu-overlay{
+            position: absolute;    
+            top:0;
+            width:100%;
+        }
+        
+        &.menu-opened .menu-overlay{
+            background-color: rgba(0,0,0, 0.7);
+            box-shadow: 0px 13px 32px -6px rgba(0,0,0,0.75);
+        }
+        
+        .navigation{
+            margin-top:-70%;
+            padding: 0;
+            opacity: 0;
+            transition: all 0.5s;
+            pointer-events: none;
+            
+            li {
+                margin-bottom: 10px;
+            }
+        }
+        
+        &.menu-opened .navigation{
+            margin-top:0px;
+            opacity: 1;
+            display: flex;
+            flex-direction: column;
+        } 
+        
+        .describe{
+            margin-bottom:320px;    
+        }
+        
+        .title{
+            margin-top: 50px;
+            font-size: 2.3rem;
+        }   
+        
+        
+    } //page-header
+    
+     .subscription{
+         
+         .subscribe-form{
+            display:flex;
+            flex-direction: column;
+            
+            .email-input{
+                text-align: center;
+                width: 245px;
+                margin-bottom:20px;
+            }   
+        }        
+    }   //subscription
+} //media width < 480px
